@@ -1,0 +1,165 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Griffy&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+  @import url("https://fonts.googleapis.com/css2?family=Philosopher&display=swap");
+
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 60px;
+  }
+
+  .inner-from-wrapper {
+    padding: 5px 30px;
+    height: 100%;
+    width: 350px;
+    border-radius: 20px;
+    border: 2px dotted rgb(157, 168, 177);
+  }
+
+  .input-detail {
+    font-family: Philosopher;
+    background: transparent;
+  }
+
+  .inner-from-wrapper .input-detail {
+    font-family: Philosopher;
+    margin: 10px 0px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+  }
+
+  .input-detail input {
+    font-family: Philosopher;
+    background: transparent;
+    color: rgb(41, 40, 37);
+    width: 80%;
+    height: 100%;
+    border-radius: 40px;
+    padding: 5px 20px;
+    border: 1px solid rgb(197, 166, 166);
+  }
+
+  .input-detail input::placeholder {
+    color: rgb(73, 183, 137);
+  }
+
+  .password-forgot a {
+    font-family: Philosopher;
+    color: rgb(73, 183, 137);
+    text-decoration: none;
+  }
+
+  .password-forgot a:hover {
+    color: rgb(98, 115, 131);
+    text-decoration: underline;
+  }
+
+  .submit-btn {
+    font-family: Griffy;
+    font-weight: 600;
+    font-size: medium;
+    background-color: aquamarine;
+    width: 100%;
+    padding: 7px;
+    margin: 10px 0px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(220, 211, 211);
+    border: none;
+  }
+
+  .register {
+    font-family: Philosopher;
+    font-size: 15px;
+    margin-top: -15px;
+    text-align: center;
+  }
+
+  .register p a {
+    color: rgb(73, 183, 137);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .register p a:hover {
+    color: rgb(98, 115, 131);
+    text-decoration: underline;
+  }
+
+  .error {
+    margin-left: 20px;
+    margin-top: 8px;
+    color: rgb(215, 19, 19);
+  }
+</style>
+
+<div class="form-wrapper">
+  <form class="inner-from-wrapper" [formGroup]="loginCredentialsForm" action="">
+    <h1 style="font-family: Griffy ; text-align: center;">Hello Again !!</h1>
+    <h4 style="margin-top: -2px ; text-align: center; color: rgb(220, 174, 23);">And On the 8th day of the week god created this store 🐱‍🏍😎!!!</h4>
+
+    <div class="input-detail">
+      <input type="text" placeholder="userName" formControlName="userName" />
+    </div>
+    <div class="input-detail">
+      <input type="email" placeholder="Email" formControlName="userEmail" />
+      <div class="error"
+        *ngIf="
+          loginCredentialsForm.get('userEmail')?.invalid &&
+          (loginCredentialsForm.get('userEmail')?.touched ||
+            loginCredentialsForm.get('userEmail')?.dirty)
+        "
+      >
+        
+          Email is invalid
+        </div>
+      </div>
+    
+
+    <div class="input-detail">
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="userPassword"
+        
+      />
+      <div
+      *ngIf="
+          loginCredentialsForm.get('userPassword')?.invalid &&
+          (loginCredentialsForm.get('userPassword')?.dirty ||
+            loginCredentialsForm.get('userPassword')?.touched)
+        ">
+
+      </div>
+      <span
+        class="error"
+        *ngIf="
+          loginCredentialsForm.get('userPassword')?.invalid &&
+          (loginCredentialsForm.get('userPassword')?.dirty ||
+            loginCredentialsForm.get('userPassword')?.touched)
+        "
+      >
+        This field is mandatory
+      </span>
+    </div>
+
+    <div class="password-forgot">
+      <a href="#">Forgot Password?</a>
+    </div>
+
+    <button type="submit" class="submit-btn" (click)="handleUserLoginSubmit()">
+      Login
+    </button>
+
+    <div class="register">
+      <p>
+        Don't have any account?
+        <a href="#">Sign Up</a>
+      </p>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,188 @@
+<style>
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+
+  .product-card {
+    width: 300px;
+    margin: 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+    background-color: #fff;
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .product-details {
+    margin-top: 10px;
+  }
+
+  .description {
+    color: #555;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .price {
+    color: #007bff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .view-details {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+
+  .view-details:hover {
+    background-color: #0056b3;
+  }
+
+  .card {
+    width: 320px;
+    height: 400px;
+    background: rgb(252, 252, 250);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card .imgBx {
+    width: 100%;
+    height: 230px;
+    background: #f00;
+    border-radius: 15px;
+    background-size: cover;
+    object-fit: cover;
+    border: 4px solid #232949;
+  }
+  .card .content {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background: #232949;
+    border-radius: 15px;
+    border-top-left-radius: 0;
+  }
+  .card .content .price {
+    position: absolute;
+    top: -100px;
+    width: 50%;
+    height: 80px;
+    background: #232949;
+    /* border-radius: 15px; */
+    border-top-right-radius: 25px;
+    border-top: 10px solid #fff;
+    border-right: 10px solid #fff;
+  }
+
+  .card .imgBx::after {
+    content: "";
+    position: absolute;
+    top: 190px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: -10px 10px 0 #fff;
+  }
+  .content .price .buyNow {
+    position: absolute;
+    background-color: #fff;
+    height: 30px;
+    width: 130px;
+    margin-top: 10px;
+    margin-left: 16px;
+    border-top-right-radius: 10px;
+  }
+  .content .price .cart {
+    position: absolute;
+    background-color: #fff;
+    height: 30px;
+    width: 130px;
+    margin-top: 48px;
+    margin-left: 16px;
+    border-top-right-radius: 10px;
+  }
+  .content .common {
+    color: #e1e1e1;
+    font-size: 15px;
+    padding: 10px;
+  }
+</style>
+
+<div style="display: flex">
+  <div
+    style="
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    "
+    *ngFor="let product of fetchedProductDetailsFromApi$ | async"
+  >
+    <div class="card">
+      <div
+        class="imgBx"
+        [ngStyle]="{ 'background-image': 'url(' + product.image + ')', 'background-size': 'cover' }"
+      ></div>
+      <div class="content">
+        <span class="price"
+          ><button class="buyNow">Buy Now</button>
+          <button class="cart">Add To Cart</button></span
+        >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-left: 20px;
+            margin-right: 20px;
+          "
+        >
+          <h1 class="common">Jewelery</h1>
+          <hr style="max-height:30px; margin-top: 15px;" />
+          <h1 style="margin-top: 15px; height: 30px; width: 70px; color: #fff; font-size: 20px;">
+            <span><i class="fa fa-star"></i>{{product.rating?.rate}}</span>
+          </h1>
+          <button style="margin-top: 15px; height: 30px; width: 70px">
+            $&nbsp;{{product.price}}
+          </button>
+        </div>
+        <h3
+          class="common"
+          style="
+            font-family: Comic Sans MS;
+            background-color: #966dc3;
+            border-radius: 20px;
+            height: 35%;
+            color: #f4f2f2;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center ;
+            text-align: center;
+          "
+        >
+        {{ truncateTitle(product.title) }}
+        </h3>
+        <span class="actions"> </span>
+      </div>
+    </div>
+  </div>
+</div>
